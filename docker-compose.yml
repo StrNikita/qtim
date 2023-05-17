@@ -1,0 +1,13 @@
+services:
+  qtim:
+    build:
+      context: .
+      dockerfile: "./Dockerfile"
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/qtim
+      - /app/node_modules
+    command: npm run start:dev
+    env_file:
+      - .env
