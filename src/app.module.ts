@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { SQL_DATABASE, SQL_HOST, SQL_PASSWORD, SQL_PORT, SQL_TYPE, SQL_USER } from './config';
+import { NewsModule } from './news/news.module';
 
 @Module({
   imports: [
@@ -16,7 +17,9 @@ import { SQL_DATABASE, SQL_HOST, SQL_PASSWORD, SQL_PORT, SQL_TYPE, SQL_USER } fr
       password: SQL_PASSWORD,
       database: SQL_DATABASE,
       entities: [`${__dirname}/**/*.entity{.ts,.js}`],
+      synchronize: true,
     }),
+    NewsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
