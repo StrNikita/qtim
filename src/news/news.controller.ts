@@ -1,8 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { NewsService } from './news.service';
 import { CreateNewsDto } from './dto/create-news.dto';
 import { UpdateNewsDto } from './dto/update-news.dto';
 import { News } from './news.entity';
+import { AccessTokenGuard } from 'src/common/guard/access-token.guard';
 
 @Controller('news')
 export class NewsController {
@@ -20,11 +21,13 @@ export class NewsController {
 		return this.newsService.findById(id);
 	}
 
+	@UseGuards(AccessTokenGuard)
 	@Post('/')
 	public createNews(@Body() body: CreateNewsDto): Promise<News> {
 		return this.newsService.create(body);
 	}
 
+	@UseGuards(AccessTokenGuard)
 	@Patch('/:id')
 	public updateNews(
 		@Param('id') id: number,
@@ -33,6 +36,7 @@ export class NewsController {
 		return this.newsService.update(id, body)
 	}
 
+	@UseGuards(AccessTokenGuard)
 	@Delete('/:id')
 	public deleteNews(@Param('id') id: number): Promise<News> {
 		return this.newsService.delete(id);

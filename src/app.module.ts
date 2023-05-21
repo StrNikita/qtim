@@ -6,6 +6,8 @@ import { AppService } from './app.service';
 import { SQL_DATABASE, SQL_HOST, SQL_PASSWORD, SQL_PORT, SQL_TYPE, SQL_USER } from './config';
 import { UserModule } from './user/user.module';
 import { NewsModule } from './news/news.module';
+import { AuthModule } from './auth/auth.module';
+import { CryptoModule } from './crypto/crypto.module';
 
 @Module({
   imports: [
@@ -22,6 +24,8 @@ import { NewsModule } from './news/news.module';
     }),
     UserModule,
     NewsModule,
+    AuthModule,
+    CryptoModule,
   ],
   controllers: [AppController],
   providers: [AppService],
